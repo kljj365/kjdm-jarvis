@@ -1,0 +1,99 @@
+/*
+ * KJDM Brand Theme for OpenJarvis Desktop
+ * Kyle Johnson Digital Marketing
+ * Background: #090911  |  Primary: #F97316  |  Text: #F0F0FF
+ * Font: Inter, JetBrains Mono (code)
+ */
+
+:root {
+  --kjdm-bg:          #090911;
+  --kjdm-bg-surface:  #12121e;
+  --kjdm-bg-card:     #1a1a2e;
+  --kjdm-primary:     #F97316;
+  --kjdm-primary-dim: #c45a0f;
+  --kjdm-text:        #F0F0FF;
+  --kjdm-text-muted:  #9090aa;
+  --kjdm-border:      #2a2a40;
+  --kjdm-success:     #22c55e;
+  --kjdm-danger:      #ef4444;
+  --kjdm-font:        'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --kjdm-font-mono:   'JetBrains Mono', 'Fira Code', monospace;
+}
+
+body, #root, .openjarvis-app {
+  background-color: var(--kjdm-bg) !important;
+  color: var(--kjdm-text) !important;
+  font-family: var(--kjdm-font) !important;
+}
+
+/* Sidebar */
+.sidebar, .nav-sidebar, [class*='sidebar'] {
+  background-color: var(--kjdm-bg-surface) !important;
+  border-right: 1px solid var(--kjdm-border) !important;
+}
+
+/* Cards and panels */
+.card, .panel, [class*='card'], [class*='panel'] {
+  background-color: var(--kjdm-bg-card) !important;
+  border: 1px solid var(--kjdm-border) !important;
+  border-radius: 8px !important;
+}
+
+/* Primary buttons */
+button[class*='primary'], .btn-primary, [class*='btn-primary'] {
+  background-color: var(--kjdm-primary) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+}
+button[class*='primary']:hover, .btn-primary:hover {
+  background-color: var(--kjdm-primary-dim) !important;
+}
+
+/* Input fields */
+input, textarea, select {
+  background-color: var(--kjdm-bg-card) !important;
+  color: var(--kjdm-text) !important;
+  border: 1px solid var(--kjdm-border) !important;
+  border-radius: 6px !important;
+  font-family: var(--kjdm-font) !important;
+}
+input:focus, textarea:focus {
+  border-color: var(--kjdm-primary) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.25) !important;
+}
+
+/* Chat messages */
+[class*='message-user'], [class*='user-message'] {
+  background-color: var(--kjdm-primary) !important;
+  color: #fff !important;
+  border-radius: 12px 12px 2px 12px !important;
+}
+[class*='message-assistant'], [class*='assistant-message'] {
+  background-color: var(--kjdm-bg-card) !important;
+  color: var(--kjdm-text) !important;
+  border: 1px solid var(--kjdm-border) !important;
+  border-radius: 12px 12px 12px 2px !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--kjdm-bg); }
+::-webkit-scrollbar-thumb { background: var(--kjdm-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--kjdm-primary); }
+
+/* Code blocks */
+pre, code { font-family: var(--kjdm-font-mono) !important; }
+pre { background: #0d0d1a !important; border: 1px solid var(--kjdm-border) !important; border-radius: 6px !important; }
+
+/* Accent text and links */
+a, [class*='accent'], [class*='highlight'] {
+  color: var(--kjdm-primary) !important;
+}
+
+/* Status indicators */
+[class*='success'] { color: var(--kjdm-success) !important; }
+[class*='error'], [class*='danger'] { color: var(--kjdm-danger) !important; }
+[class*='muted'] { color: var(--kjdm-text-muted) !important; }
