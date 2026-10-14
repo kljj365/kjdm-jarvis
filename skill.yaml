@@ -1,0 +1,51 @@
+# OpenJarvis Skill Manifest
+# Install: jarvis skill install kljj365/kjdm-jarvis
+
+name: kjdm
+version: 1.0.0
+display_name: "KJDM — Kyle Johnson Digital Marketing"
+description: >
+  Full KJDM CRM toolkit for OpenJarvis. Search and create contacts,
+  manage the sales pipeline, send SMS campaigns, schedule social posts,
+  and access the ambassador course library — all from your desktop.
+author: "Kyle Johnson <kyle.l.j.johnson@kljj365.com>"
+license: MIT
+repository: https://github.com/kljj365/kjdm-jarvis
+
+# Tools exposed to OpenJarvis agents
+tools:
+  - kjdm_jarvis.tools.crm_contacts.kjdm_search_contacts
+  - kjdm_jarvis.tools.crm_contacts.kjdm_create_contact
+  - kjdm_jarvis.tools.crm_pipeline.kjdm_pipeline_summary
+  - kjdm_jarvis.tools.crm_pipeline.kjdm_search_opportunities
+  - kjdm_jarvis.tools.crm_sms.kjdm_send_bulk_sms
+  - kjdm_jarvis.tools.crm_sms.kjdm_send_direct_sms
+  - kjdm_jarvis.tools.crm_social.kjdm_schedule_social_post
+  - kjdm_jarvis.tools.crm_courses.kjdm_list_courses
+
+# Environment variables required
+env:
+  - KJDM_AI_TOKEN     # Bearer token for copilot.kljj365.com/ai/*
+  - KJDM_LOCATION_ID  # GHL sub-account location ID (default set)
+  - KJDM_FROM_NUMBER  # E.164 sender number (default +18558570683)
+
+# Agents that use these tools
+agents:
+  - name: kjdm_sales_agent
+    description: Manages the KJDM pipeline, moves deals, and sends outreach
+    tools: [kjdm_search_contacts, kjdm_pipeline_summary, kjdm_send_bulk_sms, kjdm_send_direct_sms]
+  - name: kjdm_content_agent
+    description: Generates and schedules daily KJDM social content
+    tools: [kjdm_schedule_social_post]
+  - name: kjdm_ambassador_agent
+    description: Manages ambassador contacts and course access
+    tools: [kjdm_search_contacts, kjdm_create_contact, kjdm_list_courses, kjdm_send_direct_sms]
+
+# Brand theme
+theme:
+  css: kjdm_jarvis/theme/kjdm.css
+  colors:
+    background: "#090911"
+    primary:    "#F97316"
+    text:       "#F0F0FF"
+  font: "Inter"
