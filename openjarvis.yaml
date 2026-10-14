@@ -1,0 +1,75 @@
+# OpenJarvis Configuration for KJDM
+# Place this at ~/.openjarvis/config.yaml
+# or run: jarvis config import openjarvis.yaml
+
+# === INFERENCE ENGINE ===
+engine: cloud          # use cloud (Anthropic) when local model insufficient
+model: claude-3-5-haiku-20241022  # fast, efficient for agentic tasks
+
+# Local fallback (install Ollama + pull model first)
+# engine: ollama
+# model: qwen3:8b
+
+# === THEME ===
+theme: kjdm            # KJDM brand theme (#090911 / #F97316 / #F0F0FF)
+
+# === SKILLS ===
+skills:
+  - kljj365/kjdm-jarvis
+
+# === SCHEDULED AGENTS ===
+agents:
+  - name: kjdm_daily_outreach
+    module: kjdm_jarvis.agents.daily_outreach
+    function: run_daily_outreach
+    schedule: "0 9 * * *"           # 9:00 AM CDT daily
+    timezone: America/Chicago
+    description: Pull new prospects, send batch intro SMS, log pipeline
+
+  - name: kjdm_pipeline_manager
+    module: kjdm_jarvis.agents.pipeline_manager
+    function: run_pipeline_manager
+    schedule: "0 8 * * *"           # 8:00 AM CDT daily
+    timezone: America/Chicago
+    description: Identify stale deals and surface top priorities
+
+  - name: kjdm_content_creator
+    module: kjdm_jarvis.agents.content_creator
+    function: run_content_creator
+    schedule: "0 9 * * *"           # 9:00 AM CDT daily (schedules post for 9 PM)
+    timezone: America/Chicago
+    description: Generate + schedule today's social post across all 5 platforms
+
+# === TOOLS ALWAYS AVAILABLE IN CHAT ===
+tools:
+  - kjdm_search_contacts
+  - kjdm_create_contact
+  - kjdm_pipeline_summary
+  - kjdm_search_opportunities
+  - kjdm_send_bulk_sms
+  - kjdm_send_direct_sms
+  - kjdm_schedule_social_post
+  - kjdm_list_courses
+
+# === SYSTEM PROMPT ===
+system_prompt: |
+  You are KJDM Copilot — the AI command center for Kyle Johnson Digital Marketing.
+
+  Brand: #090911 background · #F97316 orange · #F0F0FF text · Inter font
+  Tone: professional, modern, edgy, sharp. Done beats perfect. In motion always.
+
+  You have access to the full KJDM CRM, sales pipeline, SMS, social media,
+  and ambassador course library. Every decision prioritizes:
+  1. Moving deals forward in the pipeline
+  2. Reaching more leads with less manual effort
+  3. Supporting and activating ambassadors
+  4. Delivering client websites within 24 hours
+
+  When asked about products, always refer to:
+  - Starter: $109/year (free website design + hosting)
+  - Growth: $97/month (full marketing engine)
+  - Scale: $297/month (AI-driven outreach)
+  - Ambassador: free to join, 8.3% ARR commission for life
+
+  Kyle's operating law: unified, centralized, cohesive, real-time intelligence.
+  Condition monitoring. Advanced insights. Everything connected.
